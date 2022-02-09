@@ -1,0 +1,47 @@
+<h2>Products</h2>
+
+<!-- 
+*ngFor is a structural directive 
+the div repeats for each product in the products list
+Structural directives shape or reshape the DOM's structure, by adding, removing, and manipulating elements.
+-->
+<div *ngFor="let product of products">
+  <!--
+    {{ product.name }} statement is an example of Angular's interpolation syntax. Interpolation {{ }} lets you render the property value as text.
+  -->
+  <h3>
+    <!--
+      Property binding [ ] syntax.
+      Property binding [ ] lets you use the property value in a template expression.
+    -->
+    <!--The RouterLink directive helps you customize the anchor element. In this case, the route, or URL, contains one fixed segment, /products. The final segment is variable, inserting the id property of the current product. For example, the URL for a product with an id of 1 would be similar to https://getting-started-myfork.stackblitz.io/products/1.-->
+    <a 
+    [title]="product.name + ' details'" 
+    [routerLink]="['/products', product.id]">
+      {{ product.name }}
+    </a>
+  </h3>
+  <p *ngIf="product.description">
+    Description: {{ product.description}}
+  </p>
+  
+  <!--
+    Binds the button's click event to the share() method in product-list.component.ts. Event binding uses a set of parentheses, ( ), around the event, as in the (click) event on the <button> element.
+    -->
+  <button (click)="share()">
+    Share
+  </button>
+  
+  <!--notify the button's notify event to the onNotify() method-->
+  <app-product-alerts [product]="product" (notify)="onNotify()">
+  </app-product-alerts>
+    
+
+</div>
+
+
+<!-- 
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+-->
